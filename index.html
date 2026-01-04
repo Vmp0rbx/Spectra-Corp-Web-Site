@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectra Corp - Recrutement Développeurs Minecraft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #121212;
+            --light: #f8f9fa;
+            --accent: #00d4ff;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: var(--light);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 20% 30%, rgba(37, 117, 252, 0.1) 0%, transparent 20%),
+                              radial-gradient(circle at 80% 80%, rgba(106, 17, 203, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(106, 17, 203, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            color: var(--accent);
+            font-size: 2.5rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        .logo-text span {
+            font-size: 0.9rem;
+            color: #aaa;
+            font-weight: normal;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .nav-button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 10px 25px;
+            border-radius: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(106, 17, 203, 0.4);
+            color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(37, 117, 252, 0.05) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #ccc;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(106, 17, 203, 0.5);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -10px;
+            left: 15%;
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+
+        /* Requirements */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .requirement-card {
+            background: rgba(20, 20, 30, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(106, 17, 203, 0.2);
+        }
+
+        .requirement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(106, 17, 203, 0.5);
+        }
+
+        .requirement-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .requirement-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        /* Ticket Form */
+        .ticket-form-container {
+            background: rgba(20, 20, 30, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid rgba(106, 17, 203, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(10, 10, 15, 0.8);
+            border: 1px solid rgba(106, 17, 203, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            margin: 30px auto 0;
+            width: 200px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
+        }
+
+        /* Team Info */
+        .team-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+        }
+
+        .team-logo {
+            font-size: 5rem;
+            color: var(--accent);
+        }
+
+        .team-description {
+            max-width: 800px;
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .team-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .stat {
+            background: rgba(20, 20, 30, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            min-width: 180px;
+            border: 1px solid rgba(106, 17, 203, 0.2);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            margin-top: 10px;
+            color: #aaa;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(5, 5, 10, 0.95);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(106, 17, 203, 0.3);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(106, 17, 203, 0.2);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: rgba(20, 20, 30, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid rgba(106, 17, 203, 0.5);
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .modal p {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero h2 {
+                font-size: 2.3rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .ticket-form-container {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .stat {
+                min-width: 140px;
+                padding: 20px;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>SPECTRA CORP</h1>
+                    <span>Minecraft eSport Team</span>
+                </div>
+            </div>
+            
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#recrutement">Recrutement</a></li>
+                    <li><a href="#ticket">Postuler</a></li>
+                    <li><a href="#equipe">Équipe</a></li>
+                    <li><a href="#ticket" class="nav-button">Postuler maintenant</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <h2>Recrutement Développeurs Minecraft</h2>
+            <p>Rejoignez la Spectra Corp, équipe eSport Minecraft d'élite. Nous recherchons des développeurs talentueux spécialisés en Spigot pour créer des expériences de jeu uniques.</p>
+            <a href="#ticket" class="cta-button">Postuler maintenant <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section id="recrutement">
+        <div class="container">
+            <div class="section-title">
+                <h2>Compétences Requises</h2>
+                <p>Nous recherchons des développeurs passionnés avec des compétences spécifiques en développement Minecraft</p>
+            </div>
+            
+            <div class="requirements-grid">
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <h3>Maîtrise de Java</h3>
+                    <p>Solide expérience en programmation Java, avec une compréhension approfondie des concepts POO et des meilleures pratiques de codage.</p>
+                </div>
+                
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Expérience Spigot/Bukkit</h3>
+                    <p>Connaissance pratique des API Spigot et Bukkit pour développer des plugins Minecraft performants et optimisés.</p>
+                </div>
+                
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Gestion de Bases de Données</h3>
+                    <p>Capacité à concevoir et implémenter des systèmes de base de données pour les plugins (MySQL, SQLite, MongoDB).</p>
+                </div>
+                
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Développement de Plugins</h3>
+                    <p>Expérience dans la création de plugins Minecraft complets avec fonctionnalités avancées et systèmes personnalisés.</p>
+                </div>
+                
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Travail d'Équipe</h3>
+                    <p>Capacité à collaborer avec d'autres développeurs et membres de l'équipe eSport dans un environnement professionnel.</p>
+                </div>
+                
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Passion pour Minecraft</h3>
+                    <p>Une véritable passion pour Minecraft et une compréhension approfondie de la communauté et des mécaniques de jeu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ticket Form Section -->
+    <section id="ticket">
+        <div class="container">
+            <div class="section-title">
+                <h2>Formulaire de Candidature</h2>
+                <p>Soumettez votre candidature pour rejoindre notre équipe de développement</p>
+            </div>
+            
+            <div class="ticket-form-container">
+                <form id="recruitmentForm">
+                    <div class="form-group">
+                        <label for="fullName">Nom Complet *</label>
+                        <input type="text" id="fullName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Adresse Email *</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="discord">Identifiant Discord *</label>
+                        <input type="text" id="discord" class="form-control" placeholder="ex: Utilisateur#1234" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience">Expérience en développement Spigot (années) *</label>
+                        <input type="number" id="experience" class="form-control" min="0" max="50" step="0.5" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="portfolio">Portfolio / Liens vers projets (GitHub, etc.)</label>
+                        <textarea id="portfolio" class="form-control" placeholder="Décrivez vos projets ou partagez des liens vers vos réalisations..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="motivation">Pourquoi souhaitez-vous rejoindre la Spectra Corp ? *</label>
+                        <textarea id="motivation" class="form-control" required placeholder="Expliquez vos motivations et ce que vous pourriez apporter à l'équipe..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Soumettre ma candidature</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Info Section -->
+    <section id="equipe">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre Équipe</h2>
+                <p>La Spectra Corp Minecraft - Une équipe eSport d'élite</p>
+            </div>
+            
+            <div class="team-info">
+                <div class="team-logo">
+                    <i class="fas fa-crown"></i>
+                </div>
+                
+                <div class="team-description">
+                    <p>La Spectra Corp est une équipe eSport Minecraft compétitive fondée en 2018. Nous nous spécialisons dans le développement de serveurs Minecraft uniques et la participation à des tournois compétitifs. Notre équipe de développement crée des plugins et systèmes personnalisés qui nous donnent un avantage compétitif.</p>
+                    <p>Nous recherchons actuellement des développeurs talentueux pour étendre notre équipe technique et créer la prochaine génération de plugins Minecraft pour notre serveur et notre communauté.</p>
+                </div>
+                
+                <div class="team-stats">
+                    <div class="stat">
+                        <div class="stat-value">15+</div>
+                        <div class="stat-label">Tournois gagnés</div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-value">50k+</div>
+                        <div class="stat-label">Joueurs uniques</div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Développeurs actifs</div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Serveurs actifs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Spectra Corp</h3>
+                    <p>Équipe eSport Minecraft d'élite spécialisée dans le développement de serveurs compétitifs et d'expériences de jeu uniques.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Liens Rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#recrutement">Recrutement</a></li>
+                        <li><a href="#ticket">Postuler</a></li>
+                        <li><a href="#equipe">Notre Équipe</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> recrutement@spectracorp-mc.com</li>
+                        <li><i class="fab fa-discord"></i> discord.gg/spectracorp</li>
+                        <li><i class="fas fa-globe"></i> www.spectracorp-mc.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Spectra Corp Minecraft eSport Team. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="close-modal" id="closeModal">&times;</div>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Candidature envoyée !</h3>
+            <p>Votre formulaire de recrutement a été soumis avec succès. Notre équipe examinera votre candidature et vous contactera via Discord dans les 7 à 14 jours.</p>
+            <p>Merci pour votre intérêt à rejoindre la Spectra Corp !</p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Form submission
+        const recruitmentForm = document.getElementById('recruitmentForm');
+        const successModal = document.getElementById('successModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        recruitmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // In a real application, this would send data to a server/database
+            // For demo purposes, we'll just show the success modal
+            
+            // Simulate form submission delay
+            setTimeout(() => {
+                successModal.style.display = 'flex';
+                recruitmentForm.reset();
+            }, 800);
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            successModal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.style.display = 'none';
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form data storage simulation (in a real app, this would be a backend/database)
+        console.log("Fonctionnalités du site:");
+        console.log("1. Formulaire de recrutement avec validation");
+        console.log("2. Interface responsive avec menu mobile");
+        console.log("3. Simulation d'envoi de ticket avec modal de confirmation");
+        console.log("4. Design moderne avec thème sombre et accents colorés");
+        console.log("5. Pour une version complète, il faudrait ajouter:");
+        console.log("   - Backend pour traiter les formulaires (Node.js, PHP, etc.)");
+        console.log("   - Base de données pour stocker les candidatures");
+        console.log("   - Système d'authentification pour la gestion des tickets");
+        console.log("   - Panel d'administration pour voir les candidatures");
+    </script>
+</body>
+</html>
